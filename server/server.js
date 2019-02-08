@@ -21,17 +21,15 @@ io.on('connection', (socket) => {  //io.on -> register an event, connection -> e
 
 	socket.broadcast.emit('newMessage', generateMessage('Admin', 'New user joined')); //broadcast -> send msg to every other user except sender
 			
-
 	socket.on('disconnect', () => {
 		console.log('User disconnected');
 	});
 
-	socket.on('createMessage', (msg) => {
+	socket.on('createMessage', (msg,callback) => {
 		console.log('createMessage', msg);
 
 		io.emit('newMessage', generateMessage(msg.from, msg.text));
-
-		
+		callback('This is from the server');
 	});
 });
 

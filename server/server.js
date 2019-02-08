@@ -13,11 +13,21 @@ var io = socketIO(server);  //web socket server for emit and listen
 
 app.use(express.static(publicPath));
 
-io.on('connection', (socket) =>{  //io.on -> register an event, connection -> event
+io.on('connection', (socket) => {  //io.on -> register an event, connection -> event
 	console.log('New user connected');
 
-	socket.on('disconnect', () =>{
+	socket.emit('newMessage', {
+		from: 'Uma',
+		text: 'Go stefanos',
+		createdAt: new Date().getTime()
+	});
+
+	socket.on('disconnect', () => {
 		console.log('User disconnected');
+	});
+
+	socket.on('createMessage', (message) => {
+		console.log('createMessage', message);
 	});
 });
 

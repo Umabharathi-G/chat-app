@@ -29,12 +29,12 @@ io.on('connection', (socket) => {  //io.on -> register an event, connection -> e
 		console.log('createMessage', msg);
 
 		io.emit('newMessage', generateMessage(msg.from, msg.text));
-		callback('This is from the server');
+		callback();
 	});
 
 
 	socket.on('createLocMsg', (coords) => {
-		io.emit('newLocMsg', generateLocMsg('Stefanos', coords.latitude,coords.longitude));
+		io.emit('newLocMsg', generateLocMsg('User', coords.latitude,coords.longitude));
 	});
 });
 

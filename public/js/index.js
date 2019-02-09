@@ -29,3 +29,16 @@ jQuery('#msg-form').on('submit', function (e) {
 		
 	});
 });
+
+var locBtn = jQuery('#location');
+locBtn.on('click', function () {
+	if(navigator.geolocation){
+		return alert('Geolocation not supported by your browser.');
+	}
+
+	navigator.geolocation.getCurrentPosition(function (position) {
+		console.log(position);
+	}, function () {
+		alert('Unable to fetch location.');
+	});
+});
